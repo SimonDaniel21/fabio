@@ -27,11 +27,11 @@ public class AnimatedSprite extends Sprite {
 	public AnimatedSprite(TextureAtlas textureAtlas, String[] animNames) {
 		
 		this.animations = new Animation[animNames.length];
-
+		
 		for (int i = 0; i < animNames.length; i++) {
 			Animation<TextureRegion> animation = new Animation<TextureRegion>(1f / 3f, textureAtlas.findRegions(animNames[i]));
 			animation.setPlayMode(PlayMode.LOOP_PINGPONG);
-			animation.setFrameDuration(0.3f);
+			animation.setFrameDuration(0.14f);
 			this.animations[i] = animation;
 		}
 		currentAnimation = this.animations[0];
@@ -43,7 +43,11 @@ public class AnimatedSprite extends Sprite {
 	public void update(float delta) {
 		if (!halted) {
 			elapsedTime += delta;
-			this.setRegion(currentAnimation.getKeyFrame(elapsedTime));
+			
+			TextureRegion frame = currentAnimation.getKeyFrame(elapsedTime);
+			setRegion(frame);
+			setSize(getRegionWidth()*1.0f, getRegionHeight()*0.65f);
+			//setOriginCenter();
 		
 			if (currentAnimation.getKeyFrameIndex(elapsedTime) == haltAt) {
 				halted = true;
@@ -76,6 +80,16 @@ public class AnimatedSprite extends Sprite {
 		haltAt = -1;
 		halted = false;
 		currentAnimation = animations[i];
+	}
+	
+	public void runOnce(int i, boolean loop) {
+		if (i < 0 || i >= animations.length)
+			return;
+		elapsedTime = 0;
+		haltAt = -1;
+		halted = false;
+		currentAnimation = animations[i];
+		animations[i].setPlayMode(loop? PlayMode.LOOP : PlayMode.NORMAL);
 	}
 
 	public void haltAnimation() {

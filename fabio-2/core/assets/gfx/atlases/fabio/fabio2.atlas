@@ -1,0 +1,146 @@
+
+fabio2.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+crouch
+  rotate: false
+  xy: 0, 660
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 3
+crouch
+  rotate: false
+  xy: 0, 440
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 4
+crouch
+  rotate: false
+  xy: 1100, 660
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 0
+crouch
+  rotate: false
+  xy: 660, 0
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 1
+crouch
+  rotate: false
+  xy: 880, 220
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 2
+hit
+  rotate: false
+  xy: 220, 660
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 2
+hit
+  rotate: false
+  xy: 440, 220
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 0
+hit
+  rotate: false
+  xy: 660, 440
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 1
+jump
+  rotate: false
+  xy: 880, 660
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 0
+jump
+  rotate: false
+  xy: 440, 0
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 1
+jump
+  rotate: false
+  xy: 660, 220
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 2
+jump
+  rotate: false
+  xy: 880, 440
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 3
+side
+  rotate: false
+  xy: 220, 220
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 0
+side
+  rotate: false
+  xy: 440, 440
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 1
+side
+  rotate: false
+  xy: 660, 660
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 2
+side
+  rotate: false
+  xy: 220, 0
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 3
+walk
+  rotate: false
+  xy: 0, 220
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 0
+walk
+  rotate: false
+  xy: 220, 440
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 1
+walk
+  rotate: false
+  xy: 440, 660
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 2
+walk
+  rotate: false
+  xy: 0, 0
+  size: 220, 220
+  orig: 220, 220
+  offset: 0, 0
+  index: 3
