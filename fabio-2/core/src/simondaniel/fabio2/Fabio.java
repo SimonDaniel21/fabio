@@ -1,22 +1,21 @@
 package simondaniel.fabio2;
 
-import java.nio.file.Watchable;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.utils.Array;
 
-import simondaniel.fabio2.gfx.AnimatedSprite;
+import actions.Action;
+import actions.ActionPool;
+import actions.ActionSequence;
+import actions.WaitAction;
+
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import simondaniel.fabio2.gfx.fabioAnimation;
 
 public class Fabio {
@@ -27,7 +26,11 @@ public class Fabio {
 	private Direction dir;
 	private State state;
 	
+	ActionPool actions;
+	
 	public Fabio(World w) {
+		
+		actions = new ActionPool();
 		
 		dir = Direction.RIGHT;
 		state = State.STANDING;
@@ -100,33 +103,48 @@ public class Fabio {
 			body.setLinearVelocity(body.getLinearVelocity().x, 6);
 		}
 		if( i == 80) {
-			setState(state.FALL);
+			setState(State.FALL);
 		}
 		boolean idle = true;
 		if(Gdx.input.isKeyPressed(Keys.A)) {
-			body.applyForceToCenter(new Vector2(-10,0), true);
+			//body.applyForceToCenter(new Vector2(-10,0), true);
+			body.setLinearVelocity(-3, body.getLinearVelocity().y);
 			dir = Direction.LEFT;
 			setState(State.WALKING);
 			idle = false;
 		}
 		if(Gdx.input.isKeyPressed(Keys.S)) {
-			body.applyForceToCenter(new Vector2(0,0), true);
-			setState(State.CROUCH);
-			idle = false;
+			//setState(State.CROUCH);
+			//idle = false;
+			actions.runAction(new ActionSequence(new WaitAction(4.3f),
+					new Action() {
+						
+						@Override
+						public void update(float delta) {
+							System.err.println("action executed");
+						}
+						
+						@Override
+						public boolean isFinished() {
+							return true;
+						}
+					}));
 		}
 		if(Gdx.input.isKeyPressed(Keys.D)) {
-			body.applyForceToCenter(new Vector2(10,0), true);
+			body.setLinearVelocity(3, body.getLinearVelocity().y);
 			dir = Direction.RIGHT;
 			setState(State.WALKING);
 			idle = false;
 		}
 		if(idle)
-			setState(state.STANDING);
+			setState(State.STANDING);
 		
 		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
 	
 			setState(State.HIT);
 		}
+		
+		actions.update(delta);
 		
 		as.setPosition(body.getPosition().cpy().add(0, 0.4f));
 	}
@@ -140,7 +158,7 @@ public class Fabio {
 	}
 	
 	private enum State{
-		WALKING, STANDING, HIT, JUMP, FALL, CROUCH;
+		WALKING, STANDING, HIT, JUMP, FALL, CROUCH, STAND_UP;
 	}
 	
 	private enum Direction{

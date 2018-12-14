@@ -99,7 +99,10 @@ public class fabioAnimation {
 				}
 				
 				break;
-
+			case HIT:
+				if(animations[current].isAnimationFinished(elapsedTime/2)) {
+					startWalk();
+				}
 			default:
 				break;
 			}
